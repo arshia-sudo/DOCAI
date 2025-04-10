@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Patient Registration</title>
+   <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+
+   <!-- Include Header here -->
+   {% include 'header.html' %}
+
+
+   <div class="container">
+      <!-- Left side image section -->
+      <div class="left-section"
+         style="background-image: url('{{ url_for('static', filename='images/register_image.jpg') }}');">
+      </div>
+
+      <!-- Right side Form section -->
+      <div class="right-section">
+
+         <form class="login-form" action="/register" method="post">
+            <h2>Patient Registration</h2>
+            <input type="hidden" name="doctor_id" value="{{ session['doctor_id'] }}">
+            Patient Name:
+            <input type="text" id="name" name="name" placeholder="Enter Patient Name" required><br>
+
+            Age:
+            <input type="number" id="age" name="age" placeholder="Enter Age" required><br>
+
+            
+            Gender: <select id="gender" name="gender" required>
+               <option value="Male">Male</option>
+               <option value="Female">Female</option>
+            </select>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;Hypertension:
+            <select id="hypertension" name="hypertension" required>
+               <option value="Yes">Yes</option>
+               <option value="No">No</option>
+            </select>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;Glucose Level:
+            <select id="glucose_level" name="glucose_level" required>
+               <option value="Low">Low</option>
+               <option value="Normal">Normal</option>
+               <option value="High">High</option>
+            </select><br><br>
+
+            Chronic Disease:
+            <select id="chronic_disease" name="chronic_disease" required>
+               <option value="Yes">Yes</option>
+               <option value="No">No</option>
+            </select>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;Condition:
+            <select id="condition" name="condition" required>
+               <option value="Severe">Severe</option>
+               <option value="Moderate">Moderate</option>
+               <option value="Mild">Mild</option>
+            </select><br><br>
+
+            Systolic BP:
+            <input type="number" id="systolic_bp" name="systolic_bp" required>
+
+            Diastolic BP:
+            <input type="number" id="diastolic_bp" name="diastolic_bp" required>
+
+            Chronic Condition Score (1-10):
+            <input type="number" id="chronic_score" name="chronic_score" placeholder="Enter Condtion Score (1-10)"
+               required><br>
+
+            Disease History:
+            <textarea id="disease_history" name="disease_history" placeholder="Enter Disease History"
+               required></textarea><br>
+
+            IoT Devices Available: 
+            <span><input type="checkbox" id="exampleCheckbox" name="IoT Devices Available"></span>
+               
+            <style>
+               input[type="checkbox"] {
+                   width: 20px;
+                   height: 20px;
+                   accent-color: #4CAF50; /* Change the color of the checkbox */
+               }
+           </style>
+             
+
+            <div class="button-container">
+               <button type="submit" class="submit">Register</button>
+               <button type="reset" class="cancel">Reset</button>
+            </div>
+         </form>
+
+      </div>
+
+   </div>
+
+   <!-- Include Footer here -->
+   {% include 'footer.html' %}
+
+</body>
+
+</html>

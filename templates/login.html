@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Login</title>
+    <link rel="stylesheet" href="./static/style.css">
+</head>
+<body>
+
+<!-- Include Header here -->
+    {% include 'header.html' %}
+
+
+<div class="container">
+    <!-- Left side image section -->
+    <div class="left-section" style="background-image: url('{{ url_for('static', filename='images/login_image.jpg') }}');">
+    </div>
+
+    <!-- Right side Form section -->
+    <div class="right-section">
+        <form class="login-form" action="/login" method="POST">
+            <h2>Login</h2>
+            <label for="doctor-id">Doctor ID</label>
+            <input type="text" id="doctor_id" name="doctor_id" placeholder="Enter your Doctor ID" required>
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your Password" required>
+
+            <div class="button-container">
+                <button type="submit" class="submit">Login</button>
+                <button type="reset" class="cancel">Reset</button>
+            </div>
+
+            {% if error %}
+                <div>
+                    <br/>
+                    <p style="color: red;">{{ error }}</p>
+                </div>
+            {% endif %}
+
+        </form>
+        
+    </div>
+
+</div>
+
+<!-- Include Footer here -->
+{% include 'footer.html' %}
+
+</body>
+</html>

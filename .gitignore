@@ -1,0 +1,31 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+.env/
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# MongoDB data
+*.mongodb
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# ML model temporary files
+*.pkl
+
+# Local configuration
+instance/
+.webassets-cache
+
+# Log files
+*.log

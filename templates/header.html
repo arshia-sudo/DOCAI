@@ -1,0 +1,19 @@
+<header>
+    <table align="center"  width="100%">
+    <tr>
+        <td><h1 style="font-size: 40px;">DocAI: Healthcare Portal for Doctors </h1></td>
+    </tr>
+    <tr><td align="right">
+    {% if session['doctor_id']  %}
+    <a class="linkstyl" href="{{ url_for('dashboard', doctor_id=session['doctor_id']) }}">Doctor Dashboard</a>
+    <a class="linkstyl" href="{{ url_for('logout') }}">Logout</a>
+    {% else %}
+        <a class="linkstyl" href="{{ url_for('login') }}">Login</a>
+        <!--<a class="linkstyl" href="{{ url_for('login') }}">Doctor Signup</a> -->
+
+
+    {% endif %}
+    </td></tr>
+
+    </table>
+</header>

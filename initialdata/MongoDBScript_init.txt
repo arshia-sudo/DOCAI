@@ -1,0 +1,16 @@
+/** Use MogoDBCompass to create database and collection below
+*/
+    create a database with name healthcare_db
+    create a collection with name doctors
+    create a collection with name patients
+
+    
+/** 
+* Use MogoDBCompass Add Data --> Insert Document to insert the following data in the doctors collection
+*/
+{
+  "doctor_id": "arshia",
+  "password": "arshia123"
+}
+
+

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Doctor's Notes</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+
+<!-- Include Header here -->
+    {% include 'header.html' %}
+
+
+<div class="container">
+    <!-- Left side image section -->
+    <div class="left-section" style="background-image: url('{{ url_for('static', filename='images/add_notes.jpg') }}');">
+    </div>
+
+    <!-- Right side Form section -->
+    <div class="right-section">
+
+        <form  class="login-form" method="POST">
+            <h2>Add Doctor's Notes for {{ patient['name'] }}</h2>
+            <label for="doctor_notes">Doctor's Notes:</label><br>
+            <textarea id="doctor_notes" name="doctor_notes" rows="5" cols="50" required></textarea><br><br>
+            <div class="button-container">
+                <button type="submit" class="submit">Save Notes</button>
+                <button type="reset" class="cancel">Reset</button>
+            </div>    
+            <br/>
+            <a href="{{ url_for('dashboard', doctor_id=session['doctor_id']) }}">Back to Dashboard</a>
+            <br/>
+        </form>
+    </div>
+
+</div>
+
+<!-- Include Footer here -->
+{% include 'footer.html' %}
+
+</body>
+</html>

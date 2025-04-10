@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Login</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+
+<!-- Include Header here -->
+    {% include 'header.html' %}
+
+<div class="container">
+    <!-- Left side image section -->
+    <div class="left-section" style="background-image: url('{{ url_for('static', filename='images/successful_registration.jpg') }}');">
+    </div>
+
+    <!-- Right side Form section -->
+    <div class="right-section">
+        
+        <table class="login-form">
+            <th colspan="3"> <h2>Patient Registration Successful </h2></th>    
+            <tr>
+                <td colspan="2">  <label>Patient Name :  </label>  </td>
+                <td>  <label>{{ patient['name'] }}</label></td>
+            </tr>
+            <tr>
+                <td colspan="2">  <label>Age : </label>  </td>
+                <td>  <label>{{ patient['age'] }}</label></td>
+            </tr>
+            <tr>
+                <td colspan="2">  <label>Suggested Care : </label>  </td>
+                <td>  <label>{{ patient['treatment'] }}</label></td> <!-- Displaying the AI predicted treatment -->
+            </tr>
+            <tr>
+                <td colspan="2">  <label>Emergency Status : </label>  </td>
+                <td>  <label>{{ patient['emergency_status'] }}</label></td>
+            </tr>
+            <tr>
+                <td colspan="2">  <label>Doctor's Notes:</lable>  </td>
+                <td>  
+                    {% if patient.get('doctor_notes') %}
+                        <label>{{ patient['doctor_notes'] }}</label>
+                    {% else %}
+                        <br><label>No notes available</label><br>
+                        <a href="{{ url_for('add_notes', patient_id=patient['_id']) }}">Add Notes</a>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">  <h3>QR Code:</h3>  </td>
+                <td>  <img src="data:image/png;base64,{{ patient['qr_code'] }}" alt="QR Code" width="75%" height="75%"> </td>
+            </tr>
+            <br><br>
+            <!-- Link to go back to the dashboard using dynamic doctor_id -->
+            <tr>
+            <td colspan="3"> <a href="{{ url_for('dashboard', doctor_id=session['doctor_id']) }}">Back to Dashboard</a> </td>
+            </tr>
+
+        </table>  
+    </div>
+
+</div>
+
+<!-- Include Footer here -->
+{% include 'footer.html' %}
+
+</body>
+</html>

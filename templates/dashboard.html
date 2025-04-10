@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+
+    <style>
+        /* Custom styles for the chart container */
+        .chart-container {
+            width:200%;/*rt width takes 80% of available width */
+            margin: 100px auto;  /* Center the chart and add space around */
+            max-width: 1000px;  /* Limit chart width */
+            padding: 10px;  /* Add padding inside the container */
+            background-color: #f9f9f9;  /* Light background for the chart container */
+            border-radius: 10px;  /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Soft shadow around the container */
+        }
+
+        #conditionChart {
+            width: 100% !important;  /* Make the canvas responsive */
+            height: 300px !important;  /* Fixed height for the chart */
+        }
+
+        /* Chart's labels and text styling */
+        .chart-container h3 {
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            margin-bottom: 20px;  /* Space between heading and chart */
+        }
+
+        /* Make the page look nice on smaller devices */
+        @media (max-width: 768px) {
+            .chart-container {
+                width: 95%;  /* Chart takes more space on smaller screens */
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+<!-- Include Header here -->
+{% include 'header.html' %}
+
+<div class="container">
+    <!-- Left side image section -->
+    <div class="left-section" style="background-image: url('{{ url_for('static', filename='images/successful_registration.jpg') }}');">
+    </div>
+
+    <!-- Right side Form section -->
+    <div class="right-section">
+        
+        <table class="login-form">
+            <tr>
+                <th colspan="3"> Welcome, {{ doctor.name }}</th>
+            </tr><br><br>
+            <tr>
+                <td colspan="2">  <label>Doctor Name:  </label>  </td>
+                <td>  <label>{{ doctor['name'] }}</label></td>
+            </tr>
+            <tr>
+                <td colspan="2">  <label>Registered Patients: </label>  </td>
+                <td>  <label>{{ doctor['patients'] | length }}</label></td>
+            </tr>
+            <tr>
+                <td colspan="3">  <h3>Patient Statistics: </h3>  </td>
+            </tr>
+            {% for patient in doctor['patients'] %}
+            <tr>
+                <td colspan="2">  <label>{{ patient.name }}   </label>  </td>
+                <td>  <label>{{ patient.treatment }}</label></td>
+            </tr>
+            {% endfor %}
+            <br><br>
+
+            <!-- Chart Section -->
+            
+
+            <!-- Link to go back to the dashboard using dynamic doctor_id -->
+            <tr>
+                <td colspan="3"><br/> <a href="/register" class="button">Register New Patient</a> </td>
+            </tr>
+
+        </table>
+    </div>
+
+</div>
+<div class="chart-container">
+    <!-- Heading for the chart placed above -->
+    <h3>Patients by Condition</h3>
+    <canvas id="conditionChart"></canvas>
+</div><br><br>  
+
+<!-- Include Footer here -->
+{% include 'footer.html' %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Retrieve the chart data passed from Flask
+        const chartData = {{ chart_data | tojson }};
+        console.log(chartData);  // Check the structure of the data in the console
+
+        // Set up the chart configuration
+        const ctx = document.getElementById('conditionChart').getContext('2d');
+        const conditionChart = new Chart(ctx, {
+            type: 'bar',  // Bar chart for patients' conditions
+            data: {
+                labels: chartData.labels,  // Labels (conditions)
+                datasets: [{
+                    data: chartData.values,  // Number of patients per condition
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)',  // Light teal
+                        'rgba(255, 159, 64, 0.2)',  // Light orange
+                        'rgba(255, 99, 132, 0.2)',  // Light red
+                        'rgba(54, 162, 235, 0.2)',  // Light blue
+                        'rgba(153, 102, 255, 0.2)'  // Light purple
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',  // Teal
+                        'rgba(255, 159, 64, 1)',  // Orange
+                        'rgba(255, 99, 132, 1)',  // Red
+                        'rgba(54, 162, 235, 1)',  // Blue
+                        'rgba(153, 102, 255, 1)'  // Purple
+                    ],
+                    borderWidth: 1  // Border width for the bars
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,  // Ensures responsiveness
+                scales: {
+                    y: {
+                        beginAtZero: true  // Start the Y-axis at zero
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

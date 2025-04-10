@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Healthcare App</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>AI Healthcare Web Application New</h1>
+    <form id="predictionForm">
+        <label for="inputData">Enter Patient Data:</label>
+        <input type="text" id="inputData" name="inputData" placeholder="e.g., age, symptoms">
+        <button type="submit">Get Prediction</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const inputData = document.getElementById('inputData').value;
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ data: inputData })
+            });
+            const result = await response.json();
+            document.getElementById('result').innerText = `Prediction: ${result.prediction}`;
+        });
+    </script>
+
+</body>
+</html>
