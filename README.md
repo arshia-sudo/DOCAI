@@ -1,4 +1,6 @@
 # DocAI: Healthcare Portal for Doctors
+## DEMO VIDEO:
+https://tinyurl.com/arshia-doc
 
 DocAI is a web-based healthcare portal designed for doctors to manage patient records, integrate IoT data, and leverage AI for treatment predictions.
 
